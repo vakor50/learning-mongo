@@ -36,7 +36,7 @@ namespace Vigilant.LearningMongo
 
     public static class MongoConfig
     {
-        public static readonly string CONNECTION_STRING_URI = "#PUT YOUR MONGOHQ CONNECTION STRING HERE";
-        public static readonly string DATABASE_NAME = "#PUT YOUR DATABASE NAME HERE";
+        public static readonly string CONNECTION_STRING_URI = "mongodb://<user>:<password>@kahana.mongohq.com:10098/tutorial";
+        public static readonly string DATABASE_NAME = "tutorial";
     }
 }
