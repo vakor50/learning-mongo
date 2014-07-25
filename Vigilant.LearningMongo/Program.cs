@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Driver.Builders;
+using System.Globalization;
 
 namespace Vigilant.LearningMongo
 {
@@ -32,7 +33,13 @@ namespace Vigilant.LearningMongo
 
 
             //Write your own queries here.
-
+            string start = "7/25/2014 08:00:00 PM";
+            string end = "7/26/2014 11:59:00 PM";
+            DateTime startTime = DateTime.ParseExact(start, "M/dd/yyyy hh:mm:ss tt", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+            DateTime endTime = DateTime.ParseExact(end, "M/dd/yyyy hh:mm:ss tt", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+            var organizedBySpecificDateCreated = Mongo.Database<FakeUpload>()
+                .Find(Query.And(Query.ElemMatch("Files", Query.GTE("CreatedAt", startTime)), Query.ElemMatch("Files", Query.LTE("CreatedAt", endTime))))          //Query.GT(DateTime.UtcNow.AddHours(2)))
+                .ToList();
 
             Thread.Sleep(5);                                    //Place a breakpoint on this line to inspect your query results
         }
